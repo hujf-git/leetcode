@@ -1,13 +1,17 @@
+# idea
 *.iml
 .idea/
 
+# eclipse
+*/.classpath
+*/.project
+*/.settings
+
+# target
+target/
 *.class
 *.jar
 *.war
 *.ear
 
-target/
-*/.classpath
-*/.project
-*/.settings
 
