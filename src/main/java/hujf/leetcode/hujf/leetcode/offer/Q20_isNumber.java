@@ -71,30 +71,30 @@ public class Q20_isNumber {
     int spaceEnd = 8;
 
     //定义状态转移
-    Map<Character, Integer>[] StateTo = new HashMap<>[9];
-    {
-        StateTo[spaceStart] = new HashMap<>() {
-            {
-                put(' ', spaceStart);
-                put('s', signForDigital);
-                put('d', digitalAfterDot);
-                put('.', dot);
-                put('')
-            }
-        };
-
-
-                new HashSet<>(Arrays.asList(spaceStart, signForDigital, digitalBeforeDot, dot, digitalAfterDot));
-        StateTo[signForDigital] = new HashSet<>(Arrays.asList(digitalBeforeDot, dot, digitalAfterDot));
-        StateTo[digitalBeforeDot] = new HashSet<>(Arrays.asList(digitalBeforeDot, dot));
-        StateTo[dot] = new HashSet<>(Arrays.asList(digitalAfterDot));
-        StateTo[digitalAfterDot] = new HashSet<>(Arrays.asList(digitalAfterDot, exponent, spaceEnd));
-        StateTo[exponent] = new HashSet<>(Arrays.asList(signForExponent, digitalAfterExponent));
-        StateTo[signForExponent] = new HashSet<>(Arrays.asList(digitalAfterExponent));
-        StateTo[digitalAfterExponent] = new HashSet<>(Arrays.asList(digitalAfterExponent, spaceEnd));
-        StateTo[spaceEnd] = new HashSet<>(Arrays.asList(spaceEnd));
-
-    }
+//    Map<Character, Integer>[] StateTo = new HashMap<>[9];
+//    {
+//        StateTo[spaceStart] = new HashMap<>() {
+//            {
+//                put(' ', spaceStart);
+//                put('s', signForDigital);
+//                put('d', digitalAfterDot);
+//                put('.', dot);
+//                put(' ', digitalAfterDot);
+//            }
+//        };
+//
+//
+//                new HashSet<>(Arrays.asList(spaceStart, signForDigital, digitalBeforeDot, dot, digitalAfterDot));
+//        StateTo[signForDigital] = new HashSet<>(Arrays.asList(digitalBeforeDot, dot, digitalAfterDot));
+//        StateTo[digitalBeforeDot] = new HashSet<>(Arrays.asList(digitalBeforeDot, dot));
+//        StateTo[dot] = new HashSet<>(Arrays.asList(digitalAfterDot));
+//        StateTo[digitalAfterDot] = new HashSet<>(Arrays.asList(digitalAfterDot, exponent, spaceEnd));
+//        StateTo[exponent] = new HashSet<>(Arrays.asList(signForExponent, digitalAfterExponent));
+//        StateTo[signForExponent] = new HashSet<>(Arrays.asList(digitalAfterExponent));
+//        StateTo[digitalAfterExponent] = new HashSet<>(Arrays.asList(digitalAfterExponent, spaceEnd));
+//        StateTo[spaceEnd] = new HashSet<>(Arrays.asList(spaceEnd));
+//
+//    }
 
 
     public boolean isNumber(String s) {
@@ -103,7 +103,7 @@ public class Q20_isNumber {
             int next = -1;
             char c = s.charAt(i);
             if (c == ' ') {
-                next = cur == spaceStart ?
+//                next = cur == spaceStart ?
             } else if (c == '+' || c == '-') {
 
             } else if (c >= '0' && c <= '9') {
@@ -116,8 +116,7 @@ public class Q20_isNumber {
 
             }
         }
-
+        return false;
     }
-
 
 }

@@ -39,7 +39,7 @@ package hujf.leetcode.hujf.leetcode.offer;
 public class Q26_isSubStructure {
 
     public boolean isSubStructure(TreeNode A, TreeNode B) {
-
+        return false;
     }
 
     public class TreeNode {
