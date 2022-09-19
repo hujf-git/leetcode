@@ -1,4 +1,4 @@
-package hujf.leetcode.hujf.leetcode.offer;
+package hujf.leetcode.offer;
 
 import java.math.BigInteger;
 

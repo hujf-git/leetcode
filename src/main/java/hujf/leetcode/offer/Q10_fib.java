@@ -1,7 +1,4 @@
-package hujf.leetcode.hujf.leetcode.offer;
-
-import java.util.ArrayList;
-import java.util.List;
+package hujf.leetcode.offer;
 
 /**
  * 写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项（即 F(N)）。斐波那契数列的定义如下：

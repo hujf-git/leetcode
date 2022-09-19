@@ -1,6 +1,5 @@
-package hujf.leetcode.hujf.leetcode.offer;
+package hujf.leetcode.offer;
 
-import javax.swing.tree.TreeNode;
 import java.util.Stack;
 
 /**

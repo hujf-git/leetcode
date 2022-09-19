@@ -1,4 +1,4 @@
-package hujf.leetcode.hujf.leetcode.offer;
+package hujf.leetcode.offer;
 
 /**
  * 找出数组中重复的数字。
