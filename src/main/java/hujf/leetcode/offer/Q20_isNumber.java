@@ -59,64 +59,103 @@ import java.util.*;
  */
 public class Q20_isNumber {
 
+    public static void main(String[] args) {
+        new Q20_isNumber().isNumber("3. ");
+    }
+
     // 定义状态
     int spaceStart = 0;
     int signForDigital = 1;
     int digitalBeforeDot = 2;
-    int dot = 3;
+    int dotWithDigital = 3;
     int digitalAfterDot = 4;
     int exponent = 5;
     int signForExponent = 6;
     int digitalAfterExponent = 7;
     int spaceEnd = 8;
+    int dotWithoutDigital = 9;
 
     //定义状态转移
-//    Map<Character, Integer>[] StateTo = new HashMap<>[9];
-//    {
-//        StateTo[spaceStart] = new HashMap<>() {
-//            {
-//                put(' ', spaceStart);
-//                put('s', signForDigital);
-//                put('d', digitalAfterDot);
-//                put('.', dot);
-//                put(' ', digitalAfterDot);
-//            }
-//        };
-//
-//
-//                new HashSet<>(Arrays.asList(spaceStart, signForDigital, digitalBeforeDot, dot, digitalAfterDot));
-//        StateTo[signForDigital] = new HashSet<>(Arrays.asList(digitalBeforeDot, dot, digitalAfterDot));
-//        StateTo[digitalBeforeDot] = new HashSet<>(Arrays.asList(digitalBeforeDot, dot));
-//        StateTo[dot] = new HashSet<>(Arrays.asList(digitalAfterDot));
-//        StateTo[digitalAfterDot] = new HashSet<>(Arrays.asList(digitalAfterDot, exponent, spaceEnd));
-//        StateTo[exponent] = new HashSet<>(Arrays.asList(signForExponent, digitalAfterExponent));
-//        StateTo[signForExponent] = new HashSet<>(Arrays.asList(digitalAfterExponent));
-//        StateTo[digitalAfterExponent] = new HashSet<>(Arrays.asList(digitalAfterExponent, spaceEnd));
-//        StateTo[spaceEnd] = new HashSet<>(Arrays.asList(spaceEnd));
-//
-//    }
+    Map<Character, Integer>[] stateTo = new HashMap[10];
+    {
+        stateTo[spaceStart] = new HashMap<>();
+        stateTo[spaceStart].put(' ', spaceStart);
+        stateTo[spaceStart].put('s', signForDigital);
+        stateTo[spaceStart].put('d', digitalBeforeDot);
+        stateTo[spaceStart].put('.', dotWithoutDigital);
 
+        stateTo[signForDigital] = new HashMap<>();
+        stateTo[signForDigital].put('d', digitalBeforeDot);
+        stateTo[signForDigital].put('.', dotWithoutDigital);
 
+        stateTo[digitalBeforeDot] = new HashMap<>();
+        stateTo[digitalBeforeDot].put('d', digitalBeforeDot);
+        stateTo[digitalBeforeDot].put('.', dotWithDigital);
+        stateTo[digitalBeforeDot].put('e', exponent);
+        stateTo[digitalBeforeDot].put(' ', spaceEnd);
+
+        //最关键的， '.' 需要分状态讨论是否合法，在数字后的.是合法的，前后没有数字的.是不合法的
+        stateTo[dotWithDigital] = new HashMap<>();
+        stateTo[dotWithDigital].put('d', digitalAfterDot);
+        stateTo[dotWithDigital].put('e', exponent);
+        stateTo[dotWithDigital].put(' ', spaceEnd);
+
+        stateTo[digitalAfterDot] = new HashMap<>();
+        stateTo[digitalAfterDot].put('d', digitalAfterDot);
+        stateTo[digitalAfterDot].put('e', exponent);
+        stateTo[digitalAfterDot].put(' ', spaceEnd);
+
+        stateTo[exponent] = new HashMap<>();
+        stateTo[exponent].put('s', signForExponent);
+        stateTo[exponent].put('d', digitalAfterExponent);
+
+        stateTo[signForExponent] = new HashMap<>();
+        stateTo[signForExponent].put('d', digitalAfterExponent);
+
+        stateTo[digitalAfterExponent] = new HashMap<>();
+        stateTo[digitalAfterExponent].put('d', digitalAfterExponent);
+        stateTo[digitalAfterExponent].put(' ', spaceEnd);
+
+        stateTo[spaceEnd] = new HashMap<>();
+        stateTo[spaceEnd].put(' ', spaceEnd);
+
+        stateTo[dotWithoutDigital] = new HashMap<>();
+        stateTo[dotWithoutDigital].put('d', digitalAfterDot);
+
+    }
+
+    // 定义合法状态
+    Set<Integer> validStatus = new HashSet<>();
+    {
+        validStatus.addAll(Arrays.asList(digitalBeforeDot, digitalAfterDot, digitalAfterExponent, spaceEnd, dotWithDigital));
+    }
+
+    /**
+     * 有限自动状态机
+     */
     public boolean isNumber(String s) {
-        int cur = spaceStart;
+        Integer cur = spaceStart;
         for (int i = 0; i < s.length(); ++i) {
-            int next = -1;
             char c = s.charAt(i);
+            //映射当前字符到它所在到状态
             if (c == ' ') {
-//                next = cur == spaceStart ?
+                cur = stateTo[cur].get(' ');
             } else if (c == '+' || c == '-') {
-
+                cur = stateTo[cur].get('s');
             } else if (c >= '0' && c <= '9') {
-
+                cur = stateTo[cur].get('d');
             } else if (c == '.') {
-
+                cur = stateTo[cur].get('.');
             } else if (c == 'e' || c == 'E') {
-
+                cur = stateTo[cur].get('e');
             } else {
-
+                cur = null;
+            }
+            if (cur == null) {
+                return false;
             }
         }
-        return false;
+        return validStatus.contains(cur);
     }
 
 }
