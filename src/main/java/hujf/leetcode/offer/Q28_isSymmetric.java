@@ -44,6 +44,9 @@ package hujf.leetcode.offer;
  */
 public class Q28_isSymmetric {
 
+    /**
+     * 把题目转化为左子树和右子树是否对称
+     */
     public boolean isSymmetric(TreeNode root) {
         if (root == null) {
             return true;
