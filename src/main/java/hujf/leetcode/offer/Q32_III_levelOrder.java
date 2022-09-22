@@ -1,5 +1,7 @@
 package hujf.leetcode.offer;
 
+import hujf.leetcode.annotation.WithoutAnswer;
+
 import java.util.*;
 
 /**
@@ -33,6 +35,7 @@ import java.util.*;
  * 链接：https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
+@WithoutAnswer
 public class Q32_III_levelOrder {
 
     /**
